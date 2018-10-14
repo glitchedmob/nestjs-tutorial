@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 describe('AppController', () => {
   let app: TestingModule;
 
+  // @ts-ignore
   beforeAll(async () => {
     app = await Test.createTestingModule({
       controllers: [AppController],
