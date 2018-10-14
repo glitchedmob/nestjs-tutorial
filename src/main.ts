@@ -1,13 +1,19 @@
-import { NestFactory, APP_PIPE } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 
+import { ConfigService } from './config/config.service';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(3000);
+  const config: ConfigService = app.get(ConfigService);
+  await app.listen(config.port, config.host);
 
+  if (config.env === 'development') {
+    // noinspection TsLint
+    console.log(`App running at http://${config.host}:${config.port}/`);
+  }
 }
 
 bootstrap();
