@@ -10,7 +10,7 @@ export class UserController {
   }
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body() createUserDto: CreateUserDto) {
 
   }
 
